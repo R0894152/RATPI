@@ -6,9 +6,7 @@ IN1 = 6
 IN2 = 25
 IN3 = 8
 IN4 = 7
-LED_PIN = 16
-TRIG_PIN = 23
-ECHO_PIN = 24
+BUTTON_PIN = 15
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -16,11 +14,9 @@ GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
-GPIO.setup(LED_PIN, GPIO.OUT)
-GPIO.setup(TRIG_PIN, GPIO.OUT)
-GPIO.setup(ECHO_PIN, GPIO.IN)
+GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-# Define function to trigger the stepper motor
+# Define function to trigger the stepper motor to move forward 32 steps
 def trigger_stepper_motor():
     for i in range(128):
         GPIO.output(IN1, GPIO.LOW)
@@ -53,34 +49,11 @@ def trigger_stepper_motor():
     GPIO.output(IN4, GPIO.LOW)
 
 try:
-    has_motor_moved = False
     while True:
-        # Send ultrasonic signal and measure distance
-        GPIO.output(TRIG_PIN, GPIO.LOW)
-        time.sleep(0.1)
-        GPIO.output(TRIG_PIN, GPIO.HIGH)
-        time.sleep(0.00001)
-        GPIO.output(TRIG_PIN, GPIO.LOW)
-
-        while GPIO.input(ECHO_PIN) == 0:
-            pulse_start_time = time.time()
-        while GPIO.input(ECHO_PIN) == 1:
-            pulse_end_time = time.time()
-
-        pulse_duration = pulse_end_time - pulse_start_time
-        distance = pulse_duration * 17150
-        distance = round(distance, 2)
-
-        if distance < 10 and not has_motor_moved:
+        input_state = GPIO.input(BUTTON_PIN)
+        if input_state == False:
             trigger_stepper_motor()
-            has_motor_moved = True
-            GPIO.output(IN1, GPIO.LOW)
-            GPIO.output(IN2, GPIO.LOW)
-            GPIO.output(IN3, GPIO.LOW)
-            GPIO.output(IN4, GPIO.LOW)
-
-            # Turn the LED on
-            GPIO.output(LED_PIN, GPIO.HIGH)
+            time.sleep(0.2)
 
 except KeyboardInterrupt:
     # Clean up GPIO pins
