@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-# Set up GPIO pins
+# GPIO Pins
 IN1 = 6
 IN2 = 25
 IN3 = 8
@@ -20,7 +20,7 @@ GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(TRIG_PIN, GPIO.OUT)
 GPIO.setup(ECHO_PIN, GPIO.IN)
 
-# Define function to trigger the stepper motor
+# Stepper motor functie
 def trigger_stepper_motor():
     for i in range(32):
         GPIO.output(IN1, GPIO.LOW)
@@ -55,7 +55,7 @@ def trigger_stepper_motor():
 try:
     has_motor_moved = False
     while True:
-        # Send ultrasonic signal and measure distance
+        # Verstuur ultrasonische afstand en bereken afstand
         GPIO.output(TRIG_PIN, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(TRIG_PIN, GPIO.HIGH)
@@ -79,11 +79,11 @@ try:
             GPIO.output(IN3, GPIO.LOW)
             GPIO.output(IN4, GPIO.LOW)
 
-            # Turn the LED on
+            # Zet LED aan
             GPIO.output(LED_PIN, GPIO.HIGH)
 
 except KeyboardInterrupt:
-    # Clean up GPIO pins
+    # GPIO pins cleanup
     GPIO.output(IN1, GPIO.LOW)
     GPIO.output(IN2, GPIO.LOW)
     GPIO.output(IN3, GPIO.LOW)
