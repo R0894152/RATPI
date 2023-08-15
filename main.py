@@ -6,7 +6,6 @@ IN1 = 6
 IN2 = 25
 IN3 = 8
 IN4 = 7
-LED_PIN = 16
 TRIG_PIN = 23
 ECHO_PIN = 24
 
@@ -16,13 +15,12 @@ GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
-GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(TRIG_PIN, GPIO.OUT)
 GPIO.setup(ECHO_PIN, GPIO.IN)
 
 # Define function to trigger the stepper motor
 def trigger_stepper_motor():
-    for i in range(128):
+    for i in range(64):
         GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.HIGH)
@@ -71,16 +69,13 @@ try:
         distance = pulse_duration * 17150
         distance = round(distance, 2)
 
-        if distance < 10 and not has_motor_moved:
+        if distance < 20 and not has_motor_moved:
             trigger_stepper_motor()
             has_motor_moved = True
             GPIO.output(IN1, GPIO.LOW)
             GPIO.output(IN2, GPIO.LOW)
             GPIO.output(IN3, GPIO.LOW)
             GPIO.output(IN4, GPIO.LOW)
-
-            # Turn the LED on
-            GPIO.output(LED_PIN, GPIO.HIGH)
 
 except KeyboardInterrupt:
     # Clean up GPIO pins
