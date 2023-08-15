@@ -20,10 +20,10 @@ GPIO.setup(ECHO_PIN, GPIO.IN)
 
 # Stepper motor functie
 def trigger_stepper_motor():
-    for i in range(32):
-        GPIO.output(IN1, GPIO.LOW)
+    for i in range(100):
+        GPIO.output(IN1, GPIO.HIGH)
         GPIO.output(IN2, GPIO.LOW)
-        GPIO.output(IN3, GPIO.HIGH)
+        GPIO.output(IN3, GPIO.LOW)
         GPIO.output(IN4, GPIO.LOW)
         time.sleep(0.01)
 
@@ -33,9 +33,9 @@ def trigger_stepper_motor():
         GPIO.output(IN4, GPIO.LOW)
         time.sleep(0.01)
 
-        GPIO.output(IN1, GPIO.HIGH)
+        GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.LOW)
-        GPIO.output(IN3, GPIO.LOW)
+        GPIO.output(IN3, GPIO.HIGH)
         GPIO.output(IN4, GPIO.LOW)
         time.sleep(0.01)
 
@@ -69,7 +69,7 @@ try:
         distance = pulse_duration * 17150
         distance = round(distance, 2)
 
-        if distance < 20 and not has_motor_moved:
+        if distance < 10 and not has_motor_moved:
             trigger_stepper_motor()
             has_motor_moved = True
             GPIO.output(IN1, GPIO.LOW)

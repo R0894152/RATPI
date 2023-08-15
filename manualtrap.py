@@ -18,10 +18,10 @@ GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Define function to trigger the stepper motor to move forward 32 steps
 def trigger_stepper_motor():
-    for i in range(32):
-        GPIO.output(IN1, GPIO.LOW)
+    for i in range(64):
+        GPIO.output(IN1, GPIO.HIGH)
         GPIO.output(IN2, GPIO.LOW)
-        GPIO.output(IN3, GPIO.HIGH)
+        GPIO.output(IN3, GPIO.LOW)
         GPIO.output(IN4, GPIO.LOW)
         time.sleep(0.01)
 
@@ -31,9 +31,9 @@ def trigger_stepper_motor():
         GPIO.output(IN4, GPIO.LOW)
         time.sleep(0.01)
 
-        GPIO.output(IN1, GPIO.HIGH)
+        GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.LOW)
-        GPIO.output(IN3, GPIO.LOW)
+        GPIO.output(IN3, GPIO.HIGH)
         GPIO.output(IN4, GPIO.LOW)
         time.sleep(0.01)
 
@@ -47,7 +47,6 @@ def trigger_stepper_motor():
     GPIO.output(IN2, GPIO.LOW)
     GPIO.output(IN3, GPIO.LOW)
     GPIO.output(IN4, GPIO.LOW)
-
 try:
     while True:
         input_state = GPIO.input(BUTTON_PIN)
