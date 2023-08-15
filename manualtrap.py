@@ -1,11 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-<<<<<<< HEAD
 # Set up GPIO pins
-=======
-# GPIO pins
->>>>>>> 2868bac1f7179afc8df5d3b078249a695e669f17
 IN1 = 6
 IN2 = 25
 IN3 = 8
@@ -20,15 +16,9 @@ GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-<<<<<<< HEAD
 # Define function to trigger the stepper motor to move forward 32 steps
 def trigger_stepper_motor():
     for i in range(64):
-=======
-# Stepper motor functie
-def trigger_stepper_motor():
-    for i in range(128):
->>>>>>> 2868bac1f7179afc8df5d3b078249a695e669f17
         GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.HIGH)
