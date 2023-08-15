@@ -18,7 +18,7 @@ GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Stepper motor functie en ga (x) stappen vooruit
 def trigger_stepper_motor():
-    for i in range(64):
+    for i in range(32):
         GPIO.output(IN1, GPIO.HIGH)
         GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.LOW)

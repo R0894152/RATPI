@@ -20,7 +20,7 @@ GPIO.setup(ECHO_PIN, GPIO.IN)
 
 # Stepper motor functie
 def trigger_stepper_motor():
-    for i in range(64):
+    for i in range(32):
         GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.HIGH)
@@ -77,12 +77,6 @@ try:
             GPIO.output(IN3, GPIO.LOW)
             GPIO.output(IN4, GPIO.LOW)
 
-<<<<<<< HEAD
-=======
-            # Zet LED aan
-            GPIO.output(LED_PIN, GPIO.HIGH)
-
->>>>>>> 2868bac1f7179afc8df5d3b078249a695e669f17
 except KeyboardInterrupt:
     # GPIO pins cleanup
     GPIO.output(IN1, GPIO.LOW)
